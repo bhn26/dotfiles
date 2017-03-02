@@ -18,8 +18,8 @@ Plugin 'VundleVim/Vundle.vim'
 " Installs NERDTree file navigator
 Plugin 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-" IndentLine tool
-Plugin 'Yggdroot/indentLine'
+" IndentLine tool visualization
+" Plugin 'Yggdroot/indentLine'
 
 " Jinja templating tool
 Plugin 'lepture/vim-jinja'
@@ -29,6 +29,12 @@ Plugin 'lepture/vim-jinja'
 
 " Goland development tools
 Plugin 'fatih/vim-go'
+
+" Install desert colorscheme
+Plugin 'git@github.com:fugalh/desert.vim.git'
+
+" Git compatibiliy with vim
+Plugin 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -54,7 +60,7 @@ set showmatch			" Show matching brackets when text indicator is over them
 set incsearch			" Incremental searching
 set nohlsearch			" Turn off highlighting when searching
 set bs=2			" Fix backspacing in insert mode
-set bg=dark                     " Sets baground to light
+set bg=dark                     " Sets baground to dark
 set history=700                 " Saves desired amount of Vim history
 set autoread                    " Set to auto read when a file is changed from the outside
 set cmdheight=2                 " Set height of the command bar
@@ -62,6 +68,8 @@ set wildmenu                    " Turn on the WiLd menu
 set wildignore=*.o,*~,*.pyc     " Ignore compiled files
 set magic                       " Used for regex
 set encoding=utf8               " Set utf8 as standard encoding and en_US as the standard language
+set pastetoggle=<C-p>           " Set toggle keys for paste mode
+" set mouse=a                     " Automatically enable mouse usage
 
 " Enable filetype plugins
 filetype plugin on
@@ -84,7 +92,7 @@ au BufRead,BufNewFile *.s set tabstop=8
 
 " Show syntax and color scheme
 syntax on
-:colors elflord
+:colors desert
 
 " Turn off Arrow Keys in command mode
 noremap <Up> <NOP>
@@ -92,15 +100,21 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+" For switching between many opened files
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Shortcut for front/back of line
+noremap <C-f> $
+noremap <C-a> ^
+
 " Quick escape
 imap jk <Esc>
 
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
-
-" For switching between many opened file by using ctrl+l or ctrl+h
-map <C-J> :next <CR>
-map <C-K> :prev <CR>
 
 " Map space and ctrl+space to / and ? for searching
 map <space> /
@@ -112,3 +126,7 @@ map <F11> <Esc>setlocal nospell<CR>
 
 " NERDTree Toggling using ctrl+n
 map <C-n> :NERDTreeToggle<CR>
+
+" Hidden files with NERDTree
+let NERDTreeShowHidden=1
+
